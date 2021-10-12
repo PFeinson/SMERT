@@ -25,10 +25,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'CandidateManager',
+    'ProfessionalManager',
     'CompanyManager',
+<<<<<<< HEAD
     'SMEManager',
     'RecruiterManager'
+=======
+    'RecruiterManager',
+    'SkillsManager',
+    'RoleManager'
+>>>>>>> cd0530f... feat:SME model
 ]
 
 MIDDLEWARE = [
