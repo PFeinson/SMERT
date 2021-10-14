@@ -1,5 +1,5 @@
 from django.db import models
-from ..ProfessionalManager.models import *
+
 class RoleManager(models.manager):
     def create_role (request_data, self):
         # Create model response dictionary
@@ -55,55 +55,21 @@ class RoleManager(models.manager):
                 required_skills = request_data['required_skills']
             )
             new_role.save()
-            model_response['new_role'] = new_role
-            model_response['status'] = True
-            
 class Role(models.Model):
     role_name = models.CharField(max_length=255),
     role_description = models.CharField(max_length=255),
     compensation_amount = models.FloatField(),
     total_compensation_amount = models.FloatField(),
-    # Skills required by this job
-    required_skills = models.list.ForeignKey(
-        Skill,
-        on_delete = models.CASCADE,
-    ) 
+    required_skills = models.list # List<Skills>
 
 class OpenRole(Role):
-    qualified_candidates = models.list.ForeignKey(
-        Candidate,
-        on_delete = models.CASCADE, 
-    )# qualified candidate
-    interviewed_candidates = models.list.ForeignKey(
-        Candidate,
-        on_delete = models.CASCADE,
-    )# candidates interviewed for this role
-    declined_candidates = models.list.ForeignKey(
-        Candidate,
-        on_delete = models.CASCADE,
-    ) # candidates declined for this role
-    companies_currently_seeking_this_role = models.list.ForeignKey(
-        HiringCompany,
-        on_delete = models.CASCADE,
-    ) # Companies who have this role open
-    eligable_interviewing_smes = models.list.ForeignKey(
-        SME,
-        on_delete = models.CASCADE,
-    ) # SMEs qualified to interview for this role
+    qualified_candidates = models.list # qualified candidates
+    interviewed_candidates = models.list # candidates interviewed for this role
+    declined_candidates = models.list # candidates declined for this role
+    companies_currently_seeking_this_role = models.list # Companies who have this role open
+    eligable_interviewing_smes = models.list # SMEs qualified to interview for this role
     
 class PreviousRole(Role):
-    # candidates with this xp
-    candidates_who_have_held_this_role = models.list.ForeignKey(
-        Candidate,
-        on_delete = models.CASCADE,
-    ) 
-    # companies who hae filled this role wth us
-    companies_filled_this_role_with_us = models.list.ForeignKey(
-        HiringCompany,
-        on_delete = models.CASCADE,
-    ) 
-    # SMEs who can vet for this role
-    smes_with_experience_with_this_role = models.list.ForeignKey(
-        SME,
-        on_delete = models.CASCADE,
-    ) 
+    candidates_who_have_held_this_role = models.list # candidates with this xp
+    companies_filled_this_role_with_us = models.list # companies who hae filled this role wth us
+    smes_with_experience_with_this_role = models.list # SMEs

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %} Role/GetAllRoles {% endblock %}
+
+{% block main-content %}
+    {% if request.session.status %}
+        <div class="force-overflow" >
+            {% for role in request.session.all_roles %} 
+                <div class="row h-auto">
+                    {% role.role_name %}
+                </div>
+                <div class="row h-auto">
+                    {% role.role_description %}
+                </div>
+                <div class="row h-auto">
+                    {% role.compensation_amount %}
+                </div>
+                <div class="row h-auto">
+                    {% role.total_compensation_amount %}
+                </div>
+                <div calss="row h-auto">
+                    %{ role.required_skills %}
+                </div>
+                <br /><br />
+            {% endfor %}    
+        </div>
+    {% else %}
+        <div class="force-overflow" >
+            {% for error in request.session.error_list %}
+                <div class="row h-auto">
+                    {% error %}
+                </div>
+            {% endfor %}    
+        </div>
+    {% endif %}        
+{% endblock %}
