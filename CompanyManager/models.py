@@ -1,6 +1,5 @@
 from django.db import models
-
-# Create your models here.
+from ..ProfessionalManager.models import *
 
 class Company(models.Model):
     # Company Information
@@ -15,14 +14,44 @@ class Company(models.Model):
 
 
 class HiringCompany(Company):
-   # Relational Data
-    currently_contracted_SMEs = models.list # List<SME>
-    previous_contracted_SMEs = models.list # List<SME>
-    probationary_placements = models.__dict__ # Dictionary<Candidate, Role>
-    placed_applicants = models.__dict__ # Dictionary<Candidate, PreviousRole>
-    failed_applicants = models.__dict__ # Dictionary<Candidate, Role>
+    # Relational Data
+    # SMEs currently filling Roles at this compamy 
+    currently_contracted_SMEs = models.list.ForeignKey(
+        SME,
+        on_delete=models.CASCADE,
+    )
+    # SMEs who successfully have filled roles at this company
+    previous_contracted_SMEs = models.list.ForeignKey(
+        SME,
+        on_delete=models.CASCADE,
+    )
+    # Candidates who haven't matriculated yet
+    probationary_placements = models.ForeignKey(
+        Candidate,
+        on_delete = models.CASCADE,
+    )
+    # Historical record of all Candidates placed at Roles at this Company
+    placed_applicants = models.list.ForeignKey(
+        Candidate,
+        on_delete = models.CASCADE,
+    )
+    # Historical record of all Candidates who have failed to matriculate
+    failed_applicants = models.list.ForeignKey(
+        Candidate,
+        on_delete = models.CASCADE,
+    )
     # Role Information
-    open_roles = models.List # List<OpenRole>
-    previous_roles = models.List #List<PreviousRole>
+    # Roles currently open
+    open_roles = models.List.ForeignKey(
+        OpenRole,
+        on_delete = models.CASCADE
+    )
+    # Roles previously filled
+    previous_roles = models.List.ForeignKey(
+        PreviousRole,
+        on_delete = models.CASCADE
+    )
+    # Are they hiring
     currently_hiring = models.BooleanField()
+    # Are they a first time customer
     successfully_contracted_with = models.BooleanField()
