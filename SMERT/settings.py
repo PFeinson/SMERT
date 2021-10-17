@@ -29,7 +29,9 @@ INSTALLED_APPS = [
     'CompanyManager',
     'RecruiterManager',
     'SkillsManager',
-    'RoleManager'
+    'RoleManager',
+    'OpenRoleManager',
+    'PreviousRoleManager',
 ]
 
 MIDDLEWARE = [
