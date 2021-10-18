@@ -1,5 +1,20 @@
 from django.db import models
-from ..ProfessionalManager.models import *
+from ..ProfessionalManager.models import SME, Candidate
+from ..RoleManager import Role
+from ..OpenRoleManager import OpenRole
+from ..PreviousRoleManager import PreviousRole
+
+class HiringCompanyManager(models.Manager):
+    def create_new_hiring_company(self):
+        model_response = {}
+    # Validations
+    # (>=1 && <= 255 = Length)
+    # company_name >= 1 && <= 255
+    # company_logo not required
+    # company_address >= 1 && <= 255
+    # company_contact_phone_number >= 1 && <= 10
+    # company_bio >= 1 && <= 10
+        return model_response
 
 class Company(models.Model):
     # Company Information
@@ -10,7 +25,6 @@ class Company(models.Model):
     company_contact_email_address = models.CharField(max_length=255)
     company_bio = models.CharField(max_length=255)
     company_rating = models.FloatField()
-
 
 
 class HiringCompany(Company):
@@ -35,7 +49,8 @@ class HiringCompany(Company):
         Candidate,
         on_delete = models.CASCADE,
     )
-    # Historical record of all Candidates who have failed to matriculate
+    # Historical record of all Candidates who have fai
+    # led to matriculate
     failed_applicants = models.list.ForeignKey(
         Candidate,
         on_delete = models.CASCADE,
