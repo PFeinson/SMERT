@@ -16,7 +16,7 @@ class OpenRoleManager(models.manager):
                 error_list.append("role name not long enough")
             if len(request_data['role_name']) > 255 :
                 model_response['status'] = False
-                error_list.append('role name can not exceed 255 characters')
+                error_list.append("role name can not exceed 255 characters")
         else:
             model_response['status'] = False
             error_list.append("role name not provided.")   
@@ -27,7 +27,7 @@ class OpenRoleManager(models.manager):
                 error_list.append("Role description must be at least 1 character long")
             if len(request_data['role_description']) > 255 :
                 model_response['status'] = False
-                error_list.append("Role deescription can not exceed 255 characters")         
+                error_list.append("Role deescription cannot exceed 255 characters")         
         else:
             model_response['status'] = False
             error_list.append("No role description provided.")
