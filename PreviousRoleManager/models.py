@@ -73,7 +73,7 @@ class PreviousRole(Role):
         Candidate.name,
         on_delete = models.CASCADE,
     ) 
-    # companies who hae filled this role wth us
+    # companies who have filled this role wth us
     companies_filled_this_role_with_us = models.list.ForeignKey(
         HiringCompany.company_name,
         on_delete = models.CASCADE,
