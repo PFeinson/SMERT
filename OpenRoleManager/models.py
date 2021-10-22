@@ -47,7 +47,8 @@ class OpenRoleManager(models.manager):
         else:
             model_response['status'] = False
             error_list.append("Total Compensation Amount not provided")        
-        # Validate required_skills    
+        # Validate required_skills  
+          
         if model_response['status']:
             # Create new Role to base new open role on
             new_role = Role(
